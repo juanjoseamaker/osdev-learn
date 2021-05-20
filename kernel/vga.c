@@ -55,6 +55,11 @@ void print_string(char *string) {
 			set_char(offset, string[i]);
 			offset++;
 		}
+
+		if(offset > MAX_COLS * MAX_ROWS) {
+			clean_screen();
+			offset = 0;
+		}
 	}
 
 	set_cursor(offset);
