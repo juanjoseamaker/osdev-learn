@@ -74,3 +74,25 @@ void print_backspace() {
 
 	set_cursor(offset - 1);
 }
+
+void print_address(unsigned int address) {
+	long quotient, remainder;
+    int j = 0;
+    char hexadecimalnum[100];
+
+    quotient = address;
+
+    while (quotient != 0) {
+        remainder = quotient % 16;
+        if (remainder < 10)
+            hexadecimalnum[j++] = 48 + remainder;
+        else
+            hexadecimalnum[j++] = 55 + remainder;
+        quotient = quotient / 16;
+    }
+
+    for(int i = j - 1; i >= 0; i--) {
+    	set_char(get_cursor(), hexadecimalnum[i]);
+    	set_cursor(get_cursor() + 1);
+    }
+}

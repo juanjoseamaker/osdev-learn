@@ -4,6 +4,7 @@ void print_string(char *string);
 void set_char(int offset, char character);
 void clean_screen();
 void set_color(char background, char foreground);
+void print_address(unsigned int address);
 
 #define BLACK 0
 #define BLUE 1

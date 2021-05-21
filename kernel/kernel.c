@@ -1,6 +1,7 @@
 #include <kernel/vga.h>
 #include <kernel/cpu.h>
 #include <kernel/keyboard.h>
+#include <kernel/mem.h>
 
 void main() {
 	set_color(BROWN, YELLOW);
@@ -8,7 +9,10 @@ void main() {
 	
 	print_string("Starting OS kernel\n");
 
-	print_string("Installing externel interrupts.\n");
+	print_string("Installing memory manager.\n");
+	init_mem();
+
+	print_string("Installing external interrupts.\n");
 	isr_install();
 	
 	print_string("Enabling external interrupts.\n");

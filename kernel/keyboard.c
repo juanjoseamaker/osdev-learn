@@ -2,6 +2,7 @@
 #include <kernel/keyboard.h>
 #include <kernel/vga.h>
 #include <kernel/port.h>
+#include <kernel/mem.h>
 
 #include <stdbool.h>
 
@@ -21,14 +22,14 @@ const char keymap_us[] = {
   '?', ' '
 };
 
-static char buffer[1024];
+static char *buffer;
 static int buffer_index = 0;
 
 void buffer_append_char(char ch) {
 	buffer[buffer_index] = ch;
 	buffer_index++;
 
-	if(buffer_index == 1024) buffer_index--;
+	if(buffer_index == BLOCK_SIZE) buffer_index--;
 }
 
 void buffer_remove_char() {
@@ -40,7 +41,7 @@ void buffer_remove_char() {
 }
 
 void buffer_clear() {
-	for(int i = 0; i < 1024; i++) {
+	for(int i = 0; i < BLOCK_SIZE; i++) {
 		buffer[i] = 0;
 	}
 
@@ -86,5 +87,11 @@ static void keyboard_callback(registers_t *regs) {
 }
 
 void init_keyboard() {
+	buffer = (char *) mem_alloc();
+
+	print_string("[KEYBOARD] Buffer = 0x");
+	print_address((uint32_t) buffer);
+	print_string("\n");
+	
     register_interrupt_handler(IRQ1, keyboard_callback);
 }
