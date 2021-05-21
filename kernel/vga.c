@@ -64,3 +64,13 @@ void print_string(char *string) {
 
 	set_cursor(offset);
 }
+
+void print_backspace() {
+	int offset = get_cursor();
+
+	if(offset == 0) return;
+
+	set_char(offset - 1, ' ');
+
+	set_cursor(offset - 1);
+}

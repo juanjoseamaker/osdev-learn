@@ -8,6 +8,7 @@ void main() {
 	
 	print_string("Starting OS kernel\n");
 
+	print_string("Installing externel interrupts.\n");
 	isr_install();
 	
 	print_string("Enabling external interrupts.\n");
