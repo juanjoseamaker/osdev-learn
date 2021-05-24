@@ -13,7 +13,7 @@
 static char vga_color = 0x0f;
 
 void set_color(char background, char foreground) {
-    vga_color = background << 4 | foreground;
+	vga_color = background << 4 | foreground;
 }
 
 void set_cursor(int offset) {
@@ -32,51 +32,51 @@ int get_cursor() {
 }
 
 void set_char(int offset, char character) {
-    unsigned char *video_memory = (unsigned char *) VIDEO_ADDRESS;
-    video_memory[offset * 2] = character;
-    video_memory[offset * 2 + 1] = vga_color;
+	unsigned char *video_memory = (unsigned char *) VIDEO_ADDRESS;
+	video_memory[offset * 2] = character;
+	video_memory[offset * 2 + 1] = vga_color;
 }
 
 void clean_screen() {
-    for(int i = 0; i < MAX_COLS * MAX_ROWS; i++) {
-        set_char(i, ' ');
-    }
-
-    set_cursor(0);
+	for(int i = 0; i < MAX_COLS * MAX_ROWS; i++) {
+		set_char(i, ' ');
+	}
+	
+	set_cursor(0);
 }
 
 void print_string(char *string) {
-    int offset = get_cursor();
+	int offset = get_cursor();
 
-    for(int i = 0; string[i] != 0; i++) {
-        if(string[i] == '\n') {
-            offset += MAX_COLS - (offset % MAX_COLS);
-        } else {
-            set_char(offset, string[i]);
-            offset++;
-        }
+	for(int i = 0; string[i] != 0; i++) {
+		if(string[i] == '\n') {
+			offset += MAX_COLS - (offset % MAX_COLS);
+		} else {
+			set_char(offset, string[i]);
+			offset++;
+		}
 
-        if(offset > MAX_COLS * MAX_ROWS) {
-            clean_screen();
-            offset = 0;
-        }
-    }
+		if(offset > MAX_COLS * MAX_ROWS) {
+			clean_screen();
+			offset = 0;
+		}
+	}
 
-    set_cursor(offset);
+	set_cursor(offset);
 }
 
 void print_backspace() {
-    int offset = get_cursor();
+	int offset = get_cursor();
 
-    if(offset == 0) return;
+	if(offset == 0) return;
 
-    set_char(offset - 1, ' ');
+	set_char(offset - 1, ' ');
 
-    set_cursor(offset - 1);
+	set_cursor(offset - 1);
 }
 
 void print_address(unsigned int address) {
-    long quotient, remainder;
+	long quotient, remainder;
     int j = 0;
     char hexadecimalnum[100];
 
@@ -92,7 +92,7 @@ void print_address(unsigned int address) {
     }
 
     for(int i = j - 1; i >= 0; i--) {
-        set_char(get_cursor(), hexadecimalnum[i]);
-        set_cursor(get_cursor() + 1);
+    	set_char(get_cursor(), hexadecimalnum[i]);
+    	set_cursor(get_cursor() + 1);
     }
 }

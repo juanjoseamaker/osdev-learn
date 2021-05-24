@@ -7,6 +7,7 @@
 #define MEM_END		   0x7F000
 
 #define BLOCK_SIZE	   0x1000
+#define ALIGN		   8
 
 #define GET_BIT(bit)   (bitmap[bit / 32] & ( 1 << (bit % 32))) >> (bit % 32)
 #define SET_BIT(bit)   bitmap[bit / 32] |= 1 << (bit % 32)

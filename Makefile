@@ -33,3 +33,6 @@ run: os-image.iso
 
 clean:
 	rm $(COBJFILES) $(ASMOBJFILES) *.bin *.iso
+
+format:
+	astyle $(CFILES)
