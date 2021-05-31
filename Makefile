@@ -36,3 +36,4 @@ clean:
 
 format:
 	astyle $(CFILES)
+	find . -type f -name "*.c.orig" -exec rm -f {} \;
