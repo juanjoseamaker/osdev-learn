@@ -17,7 +17,7 @@ os-image.iso: mbr.bin kernel.bin
 	cat $^ > $@
 
 $(BUILD_PATH)/%.o: %.c
-	$(CC) $(CC_FLAGS) -c $< -o $@
+	$(CC) $(CC_FLAGS) $< -o $@
 
 $(BUILD_PATH)/%.o: %.asm
 	$(ASM) $(ASM_FLAGS) $< -o $@
