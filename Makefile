@@ -4,13 +4,13 @@ ASM	= nasm
 SOURCE_PATH	= ./kernel
 BUILD_PATH	= ./build
 
-CC_FLAGS	= -m32 -ffreestanding -fno-pie -Wall -c -I $(SOURCE_PATH)/include
+CC_FLAGS	= -m32 -ffreestanding -fno-pie -fno-stack-protector -Wall -c -I $(SOURCE_PATH)/include
 ASM_FLAGS	= -f elf
 
-CFILES    := $(shell find $(SOURCE_PATH) -type f -name '*.c')
+CFILES    := $(sort $(shell find $(SOURCE_PATH) -type f -name '*.c'))
 COBJFILES := $(patsubst %.c,$(BUILD_PATH)/%.o,$(CFILES))
 
-ASMFILES  := $(shell find $(SOURCE_PATH) -type f -name '*.asm')
+ASMFILES  := $(sort $(shell find $(SOURCE_PATH) -type f -name '*.asm'))
 ASMOBJFILES := $(patsubst %.asm,$(BUILD_PATH)/%.o,$(ASMFILES))
 
 os-image.iso: mbr.bin kernel.bin
