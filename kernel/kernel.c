@@ -2,6 +2,7 @@
 #include <kernel/cpu.h>
 #include <kernel/keyboard.h>
 #include <kernel/mem.h>
+#include <kernel/rtc.h>
 
 void main() {
     set_color(BROWN, YELLOW);
@@ -20,4 +21,7 @@ void main() {
 
     print_string("Initializing keyboard (IRQ 1).\n");
     init_keyboard();
+
+    print_string("Initializing RTC (IRQ 8).\n");
+    init_rtc();
 }

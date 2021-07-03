@@ -29,7 +29,7 @@ mbr.bin:
 	nasm ./bootloader/mbr.asm -f bin -o $@
 
 run: os-image.iso
-	qemu-system-i386 $< -enable-kvm
+	qemu-system-i386 $< -rtc base=localtime -enable-kvm
 
 clean:
 	rm $(COBJFILES) $(ASMOBJFILES) *.bin *.iso

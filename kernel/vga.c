@@ -1,6 +1,9 @@
 #include <kernel/vga.h>
 #include <kernel/port.h>
 
+#include <limits.h>
+#include <stdbool.h>
+
 #define VGA_CTRL_REGISTER 0x3d4
 #define VGA_DATA_REGISTER 0x3d5
 #define VGA_OFFSET_LOW 0x0f
@@ -95,4 +98,39 @@ void print_address(unsigned int address) {
         set_char(get_cursor(), hexadecimalnum[i]);
         set_cursor(get_cursor() + 1);
     }
+}
+
+void print_number(int n) {
+    char buffer[50];
+    int i = 0;
+
+    bool isNeg = n<0;
+
+    unsigned int n1 = isNeg ? -n : n;
+
+    while(n1!=0)
+    {
+        buffer[i++] = n1%10+'0';
+        n1=n1/10;
+    }
+
+    if(isNeg)
+        buffer[i++] = '-';
+
+    buffer[i] = '\0';
+
+    for(int t = 0; t < i/2; t++)
+    {
+        buffer[t] ^= buffer[i-t-1];
+        buffer[i-t-1] ^= buffer[t];
+        buffer[t] ^= buffer[i-t-1];
+    }
+
+    if(n == 0)
+    {
+        buffer[0] = '0';
+        buffer[1] = '\0';
+    }
+
+    print_string(buffer);
 }
