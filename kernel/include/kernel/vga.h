@@ -6,6 +6,8 @@ void clean_screen();
 void set_color(char background, char foreground);
 void print_address(unsigned int address);
 void print_number(int num);
+void print_nl();
+void read_string(char *buff, int size);
 
 #define BLACK 0
 #define BLUE 1

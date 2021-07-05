@@ -68,6 +68,18 @@ void print_string(char *string) {
     set_cursor(offset);
 }
 
+void print_nl() {
+    int offset = get_cursor();
+    offset += MAX_COLS - (offset % MAX_COLS);
+
+    if(offset > MAX_COLS * MAX_ROWS) {
+        clean_screen();
+        offset = 0;
+    }
+
+    set_cursor(offset);
+}
+
 void print_backspace() {
     int offset = get_cursor();
 

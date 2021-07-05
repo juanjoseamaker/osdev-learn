@@ -47,8 +47,6 @@ static void rtc_callback(registers_t *regs) {
             global_time.day_of_month = read_register(0x07);
         }
     }
-
-    print_time(get_global_time());
 }
 
 void print_time(time_t *time) {

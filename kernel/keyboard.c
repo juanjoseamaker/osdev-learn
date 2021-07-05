@@ -9,6 +9,7 @@
 #define KM_MAX 57
 
 static bool caps_lock = false;
+static bool readable = false;
 
 // *INDENT-OFF*
 
@@ -71,13 +72,8 @@ static void keyboard_callback(registers_t *regs) {
         print_backspace();
         buffer_remove_char();
     } else if(scancode == 0x1c) {
-        print_string("\n");
-
-        // Enter
-        print_string(buffer);
-        print_string("\n");
-
-        buffer_clear();
+        print_nl();
+        readable = true;
     } else {
         if(scancode > KM_MAX) return;
 
@@ -95,7 +91,16 @@ void init_keyboard() {
 
     print_string("[KEYBOARD] Buffer = 0x");
     print_address((uint32_t) buffer);
-    print_string("\n");
+    print_nl();
 
     register_interrupt_handler(IRQ1, keyboard_callback);
+}
+
+void read_string(char *buff, int size) {
+    while(readable == false);
+    for(int i = 0; i < size; i++) {
+        *(buff + i) = *(buffer + i);
+    }
+    readable = false;
+    buffer_clear();
 }
