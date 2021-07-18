@@ -4,10 +4,10 @@ void print_string(char *string);
 void set_char(int offset, char character);
 void clean_screen();
 void set_color(char background, char foreground);
-void print_address(unsigned int address);
+void print_hex(unsigned int number);
 void print_number(int num);
 void print_nl();
-void read_string(char *buff, int size);
+void print_buffer(unsigned int address, unsigned int size);
 
 #define BLACK 0
 #define BLUE 1

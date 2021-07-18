@@ -90,12 +90,12 @@ void print_backspace() {
     set_cursor(offset - 1);
 }
 
-void print_address(unsigned int address) {
+void print_hex(unsigned int number) {
     long quotient, remainder;
     int j = 0;
     char hexadecimalnum[100];
 
-    quotient = address;
+    quotient = number;
 
     while (quotient != 0) {
         remainder = quotient % 16;
@@ -145,4 +145,18 @@ void print_number(int n) {
     }
 
     print_string(buffer);
+}
+
+void print_buffer(unsigned int address, unsigned int size) {
+    print_string("Buffer 0x");
+    print_hex(address);
+    print_nl();
+
+    for (unsigned int i=0; i<size; i++) {
+        print_string("0x");
+        print_hex((unsigned int)(((char*)address)[i]));
+        print_string(" ");
+    }
+
+    print_nl();
 }

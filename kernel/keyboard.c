@@ -90,7 +90,7 @@ void init_keyboard() {
     buffer = (char *) mem_alloc();
 
     print_string("[KEYBOARD] Buffer = 0x");
-    print_address((uint32_t) buffer);
+    print_hex((uint32_t) buffer);
     print_nl();
 
     register_interrupt_handler(IRQ1, keyboard_callback);

@@ -3,6 +3,7 @@
 #include <kernel/keyboard.h>
 #include <kernel/mem.h>
 #include <kernel/rtc.h>
+#include <kernel/ata.h>
 
 #include <stdbool.h>
 
@@ -68,6 +69,9 @@ void main() {
 
     print_string("Initializing RTC (IRQ 8).\n");
     init_rtc();
+
+    print_string("Initializing ATA PIO driver.\n");
+    init_ata();
 
     shell();
 }
